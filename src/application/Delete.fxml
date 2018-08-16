@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DeleteController">
+   <center>
+      <TableView fx:id="tabla" BorderPane.alignment="CENTER">
+        <columns>
+            <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="nomColumn" prefWidth="75.0" text="Nombre" />
+            <TableColumn fx:id="apColumn" prefWidth="75.0" text="Apellido" />
+            <TableColumn fx:id="carColumn" prefWidth="75.0" text="Cargo" />
+            <TableColumn fx:id="userColumn" prefWidth="75.0" text="Usuario" />
+          <TableColumn fx:id="passColumn" prefWidth="75.0" text="Clave" />
+        </columns>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" />
+         </BorderPane.margin>
+      </TableView>
+   </center>
+   <top>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="titulo" text="Eliminar Usuarios">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="160.0" right="20.0" top="10.0" />
+         </padding>
+      </VBox>
+   </top>
+   <bottom>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="mensaje">
+               <VBox.margin>
+                  <Insets left="220.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <HBox>
+               <children>
+                  <Button fx:id="eliminar" mnemonicParsing="false" onAction="#eliminar" text="Eliminar">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="40.0" right="20.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Separator orientation="VERTICAL">
+                     <HBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </HBox.margin>
+                  </Separator>
+                  <Button fx:id="regresar" mnemonicParsing="false" text="Regresar">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="80.0" right="40.0" top="20.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </bottom>
+</BorderPane>
