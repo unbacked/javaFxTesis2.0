@@ -63,7 +63,7 @@
                         <Insets left="20.0" right="20.0" />
                      </HBox.margin>
                   </Separator>
-                  <Button fx:id="regresar" mnemonicParsing="false" text="Regresar">
+                  <Button fx:id="regresar" mnemonicParsing="false" onAction="#regresar" text="Regresar">
                      <font>
                         <Font size="13.0" />
                      </font>
