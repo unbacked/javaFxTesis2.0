@@ -150,7 +150,7 @@
                         <Insets bottom="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="regresar" mnemonicParsing="false" text="Regresar">
+                  <Button fx:id="regresar" mnemonicParsing="false" onAction="#regresar" text="Regresar">
                      <HBox.margin>
                         <Insets bottom="5.0" right="5.0" top="5.0" />
                      </HBox.margin>

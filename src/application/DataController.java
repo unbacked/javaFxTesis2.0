@@ -89,4 +89,15 @@ public class DataController {
 		newWindow.setScene(captura);
 		newWindow.show();		
 	}
+	
+	@FXML protected void regresar(ActionEvent event) throws IOException {
+		Parent loader = FXMLLoader.load(getClass().getResource("SecondScene.fxml"));
+		Scene regreso = new Scene(loader);
+		
+		Stage newWindow;
+		newWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
+		
+		newWindow.setScene(regreso);
+		newWindow.show();
+	}
 }
