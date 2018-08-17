@@ -86,6 +86,8 @@ public class DataController {
 		Stage newWindow;
 		newWindow =(Stage)((Node)event.getSource()).getScene().getWindow();
 		
+		newWindow.setWidth(700);
+		newWindow.setHeight(600);
 		newWindow.setScene(captura);
 		newWindow.show();		
 	}
