@@ -1,24 +1,67 @@
 package application;
 
-/*import java.io.File;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;*/
+import java.io.InputStream;
 
 import java.sql.*;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 
-//import org.apache.commons.net.ftp.*;
+import org.apache.commons.net.ftp.*;
 
 public class ConexionesExternas {
+	Connection myConn = null;
+	Statement myStmt = null;
+	ResultSet myRs = null;
+	
+	protected void conexionFTP() {
+		FTPClient Client = new FTPClient();
+		FileInputStream fis = null;
+		
+		try {
+			Client.connect("192.168.1.10");
+			
+			boolean login = Client.login("ftptesis", "vyos");
+			Client.enterLocalPassiveMode();
+			Client.setFileType(FTP.BINARY_FILE_TYPE);
+			
+			if(login) {
+				System.out.print("Se ha conectado");
+			}
+			//Se crea un InputStream para el archivo que se va a cargar
+			File firstLocalFile = new File("C:/Users/DanielT/eclipse-workspace/JavaFXTesis/trainer/trainer.yml");
+			
+			String firstRemoteFile = "trainer.yml";
+			InputStream inputStream = new FileInputStream(firstLocalFile);
+			
+			System.out.println("Comenzando la carga del archivo");
+			boolean done = Client.storeFile(firstRemoteFile, inputStream);
+			inputStream.close();
+			if(done) {
+				System.out.println("El archivo se ha cargado");
+			}
+			Client.logout();
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (fis != null) {
+					fis.close();
+				}
+				Client.disconnect();
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	protected void conexionDBnormal(String nombre, String apellido, String cargo, String user, String pass, int perfil) throws SQLException {
-		Connection myConn = null;
-		Statement myStmt = null;
-		ResultSet myRs = null;
-		
 		try {
 			/*
 			 * Conexion con la DB
@@ -65,10 +108,7 @@ public class ConexionesExternas {
 		}
 	}
 	
-	protected boolean conexionAdmin(String user, String pass) throws SQLException {
-		Connection myConn = null;
-		Statement myStmt = null;
-		ResultSet myRs = null;	
+	protected boolean conexionAdmin(String user, String pass) throws SQLException {	
 		boolean autorizacion = false;
 		//String clave[];
 		//String usuario[];
@@ -122,11 +162,7 @@ public class ConexionesExternas {
 		return autorizacion;
 	}
 	
-	protected void conexionTabla(TableView<Person> list,  ObservableList<Person> items) throws SQLException {
-		Connection myConn = null;
-		Statement myStmt = null;
-		ResultSet myRs = null;
-		
+	protected void conexionTabla(TableView<Person> list,  ObservableList<Person> items) throws SQLException {		
 		try {
 			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tesis", "root", "");
 		}
@@ -147,8 +183,7 @@ public class ConexionesExternas {
 	}
 	
 	protected void eliminarUsuario(ObservableList<Person> items) throws SQLException {
-		Connection myConn = null;
-		String id = items.get(0).getNombre();
+		String id = items.get(0).getId();
 		String query = "DELETE FROM empleados WHERE id=?";
 		
 		try {
@@ -175,5 +210,40 @@ public class ConexionesExternas {
 				System.out.println(ex.getMessage());
 			}
 		}
+	}
+	
+	protected int lastId() throws SQLException{
+		int id = 0;
+		
+		try {
+			
+			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tesis", "root", "");
+			
+			myStmt = myConn.createStatement();
+			
+			
+			myRs = myStmt.executeQuery("select * from empleados order by id desc limit 1");
+			
+			while(myRs.next()) {
+				id = myRs.getInt("id");
+			}
+			
+		}
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}
+		finally {
+			if (myRs != null) {
+				myRs.close();
+			}
+			if (myStmt != null) {
+				myStmt.close();
+			}
+			if (myConn != null) {
+				myConn.close();
+			}
+		}
+		
+		return id;
 	}
 }

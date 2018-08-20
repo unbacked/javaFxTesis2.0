@@ -36,14 +36,14 @@ public class DeleteController implements Initializable {
 	@FXML private TableColumn <Person, String> userColumn;
 	@FXML private TableColumn <Person, String> passColumn;
 	
+	ConexionesExternas con = new ConexionesExternas();
+	
 	private ObservableList<Person> people = FXCollections.observableArrayList();
 	
 	protected void llenarTabla() throws SQLException{
-		ConexionesExternas con = new ConexionesExternas();
 		
 		con.conexionTabla(tabla, people);
 	}
-	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -69,7 +69,6 @@ public class DeleteController implements Initializable {
 		allPeople = tabla.getItems();
 		
 		selectedRows = tabla.getSelectionModel().getSelectedItems();
-		ConexionesExternas con = new ConexionesExternas();
 		con.eliminarUsuario(selectedRows);
 		allPeople.removeAll(selectedRows);
 	}

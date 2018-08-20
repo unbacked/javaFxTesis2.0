@@ -31,6 +31,8 @@ public class DataController {
 	@FXML private Button video;
 	@FXML private Button regresar;
 	
+	ConexionesExternas con = new ConexionesExternas();
+	
 	@FXML protected void perfiles() {
 		String cargo = textCargo.getText().toLowerCase().trim();
 		if (cargo.contains("seguridad") || cargo.contains("admin")) {
@@ -44,7 +46,6 @@ public class DataController {
 	}
 	
 	@FXML protected void ingresoDatos() throws SQLException {
-		ConexionesExternas con = new ConexionesExternas();
 		String nombre = textNombre.getText();
 		String apellido = textApellido.getText();
 		String cargo = textCargo.getText().toLowerCase();

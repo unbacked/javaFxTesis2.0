@@ -29,11 +29,13 @@ public class FirstSceneController {
 	@FXML private TextField textUser;
 	@FXML private TextField textPass;
 	
+	ConexionesExternas con = new ConexionesExternas();
+	
+	
 	@FXML protected void ingresoDatos(ActionEvent event) throws SQLException, IOException {
 		/*
 		 * Inicializo todo lo necesario
 		 */
-		ConexionesExternas con = new ConexionesExternas();
 		String usuario = textUser.getText().toString().trim();
 		String clave = textPass.getText().toString().trim();
 		boolean a = false;

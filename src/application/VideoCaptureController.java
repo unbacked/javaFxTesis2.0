@@ -1,6 +1,7 @@
 package application;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -34,6 +35,10 @@ public class VideoCaptureController implements Initializable {
 	@FXML private Button entrenador;
 	@FXML private Label hola;
 	
+	ConexionesExternas con = new ConexionesExternas();
+	
+	int ultimoID = 0;
+	
 	private ScheduledExecutorService timer;
 	private boolean camaraAct = false;
 	private static int cameraId = 0;
@@ -61,6 +66,13 @@ public class VideoCaptureController implements Initializable {
 			
 			if(this.capture.isOpened()) {
 				this.camaraAct = true;
+				
+				try {
+					ultimoID = con.lastId();
+				} 
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
 				
 				Runnable frameGrabber = new Runnable() {
 
@@ -140,7 +152,7 @@ public class VideoCaptureController implements Initializable {
 			Rect rectCrop = new Rect(rect.x, rect.y, rect.width, rect.height);
 			Mat imageROI = new Mat(grayFrame, rectCrop);
 			
-			String filename = "dataset/"+"1-"+d+".png";
+			String filename = "dataset/"+ultimoID+"-"+d+".png";
 			System.out.println(String.format("Writing %s", filename));
 			Imgcodecs.imwrite(filename, imageROI);
 			d++;
@@ -168,8 +180,5 @@ public class VideoCaptureController implements Initializable {
 	private void updateImageView(ImageView view, Image image) {
 		Utils.onFXThread(view.imageProperty(), image);
 	}
-	
-/*	private void setClosed() {
-		this.stopAcquisition();
-	}*/
+
 }
