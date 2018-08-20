@@ -6,17 +6,16 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-//import org.opencv.core.Core;
-//import org.opencv.core.CvType;
+import org.opencv.core.Core;
 import org.opencv.core.Mat;
-//import org.opencv.core.MatOfRect;
-//import org.opencv.core.Rect;
-//import org.opencv.core.Scalar;
-//import org.opencv.core.Size;
-//import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.core.MatOfRect;
+import org.opencv.core.Rect;
+import org.opencv.core.Scalar;
+import org.opencv.core.Size;
+import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
-//import org.opencv.objdetect.CascadeClassifier;
-//import org.opencv.objdetect.Objdetect;
+import org.opencv.objdetect.CascadeClassifier;
+import org.opencv.objdetect.Objdetect;
 import org.opencv.videoio.VideoCapture;
 
 import javafx.event.ActionEvent;
@@ -39,24 +38,21 @@ public class VideoCaptureController implements Initializable {
 	private boolean camaraAct = false;
 	private static int cameraId = 0;
 	private VideoCapture capture = new VideoCapture();
-	//private CascadeClassifier faceCascade;
-	//private int absoluteFaceSize;
-	//private int d = 0;
+	private CascadeClassifier faceCascade;
+	private int absoluteFaceSize;
+	private int d = 0;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		/*System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-		Mat mat = Mat.eye(3, 3, CvType.CV_8SC1);
-		System.out.println("mat= "+mat.dump()); */
 		
 		this.capture = new VideoCapture();
-		//this.faceCascade = new CascadeClassifier();
-		//this.absoluteFaceSize = 0;
+		this.faceCascade = new CascadeClassifier();
+		this.absoluteFaceSize = 0;
 		
 		originalFrame.setFitWidth(600);
 		originalFrame.setPreserveRatio(true);
 		
-		//System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 	}
 	
 	@FXML protected void startCamera(ActionEvent event) {
@@ -90,7 +86,7 @@ public class VideoCaptureController implements Initializable {
 		else {
 			this.camaraAct = false;
 			this.cameraButton.setText("Iniciar Camara");
-			
+
 			this.stopAcquisition();
 		}
 	}
@@ -104,8 +100,8 @@ public class VideoCaptureController implements Initializable {
 				
 				if(!frame.empty()) {
 					// Deteccion de caras
-					Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);
-					//this.detectAndDisplay(frame);
+					//Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);
+					this.detectAndDisplay(frame);
 				}
 			}
 			catch (Exception e) {
@@ -116,7 +112,7 @@ public class VideoCaptureController implements Initializable {
 		return frame;
 	}
 	
-/*	private void detectAndDisplay(Mat frame) {
+	private void detectAndDisplay(Mat frame) {
 		MatOfRect faces = new MatOfRect();
 		Mat grayFrame = new Mat();
 		
@@ -149,7 +145,7 @@ public class VideoCaptureController implements Initializable {
 			Imgcodecs.imwrite(filename, imageROI);
 			d++;
 		}
-	} */
+	} 
 	
 	private void stopAcquisition() {
 		if(this.timer != null && !this.timer.isShutdown()) {
