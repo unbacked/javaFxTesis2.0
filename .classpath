@@ -6,5 +6,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Apache Conectors"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/MySQL Conectors"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/openCV"/>
+	<classpathentry kind="lib" path="C:/Users/USER/Desktop/tesis/mysql-connector-java-5.1.45-bin.jar"/>
+	<classpathentry kind="lib" path="C:/opencv/build/java/opencv-340.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -23,7 +23,7 @@ public class ConexionesExternas {
 			/*
 			 * Conexion con la DB
 			 */
-			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tesis","root","");
+			myConn = DriverManager.getConnection("jdbc:mysql://192.168.1.11:3306/tesis","root","");
 			/*
 			 * Creamos el estado de la conexion
 			 */
@@ -76,7 +76,7 @@ public class ConexionesExternas {
 			/*
 			 * Conexion con la DB
 			 */
-			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tesis", "root", "");
+			myConn = DriverManager.getConnection("jdbc:mysql://192.168.1.11:3306/tesis", "root", "");
 			/*
 			 * Creamos el estado de la conexion
 			 */
@@ -128,7 +128,7 @@ public class ConexionesExternas {
 		ResultSet myRs = null;
 		
 		try {
-			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tesis", "root", "");
+			myConn = DriverManager.getConnection("jdbc:mysql://192.168.1.11:3306/tesis", "root", "");
 		}
 		catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -148,11 +148,12 @@ public class ConexionesExternas {
 	
 	protected void eliminarUsuario(ObservableList<Person> items) throws SQLException {
 		Connection myConn = null;
-		String id = items.get(0).getNombre();
+		String id = items.get(0).getId();
+		System.out.println(id);
 		String query = "DELETE FROM empleados WHERE id=?";
 		
 		try {
-			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tesis","root","");
+			myConn = DriverManager.getConnection("jdbc:mysql://192.168.1.11:3306/tesis","root","");
 			
 			PreparedStatement stmt = myConn.prepareStatement(query);
 			stmt.setInt(1, Integer.parseInt(id));
@@ -175,5 +176,44 @@ public class ConexionesExternas {
 				System.out.println(ex.getMessage());
 			}
 		}
+	}
+	
+	protected int lastId() throws SQLException{
+		int id = 0;
+		
+		Connection myConn = null;
+		Statement myStmt = null;
+		ResultSet myRs = null;	
+		
+		try {
+			
+			myConn = DriverManager.getConnection("jdbc:mysql://192.168.1.11:3306/tesis", "root", "");
+			
+			myStmt = myConn.createStatement();
+			
+			
+			myRs = myStmt.executeQuery("select * from empleados order by id desc limit 1");
+			
+			while(myRs.next()) {
+				id = myRs.getInt("id");
+			}
+			
+		}
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}
+		finally {
+			if (myRs != null) {
+				myRs.close();
+			}
+			if (myStmt != null) {
+				myStmt.close();
+			}
+			if (myConn != null) {
+				myConn.close();
+			}
+		}
+		
+		return id;
 	}
 }

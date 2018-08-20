@@ -1,6 +1,7 @@
 package application;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -41,6 +42,8 @@ public class VideoCaptureController implements Initializable {
 	private CascadeClassifier faceCascade;
 	private int absoluteFaceSize;
 	private int d = 0;
+	ConexionesExternas con;
+	int ultimoId =0;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -51,6 +54,7 @@ public class VideoCaptureController implements Initializable {
 		
 		originalFrame.setFitWidth(600);
 		originalFrame.setPreserveRatio(true);
+		con = new ConexionesExternas();
 		
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 	}
@@ -61,6 +65,13 @@ public class VideoCaptureController implements Initializable {
 			
 			if(this.capture.isOpened()) {
 				this.camaraAct = true;
+				
+				try {
+					ultimoId = con.lastId();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				Runnable frameGrabber = new Runnable() {
 
@@ -140,7 +151,9 @@ public class VideoCaptureController implements Initializable {
 			Rect rectCrop = new Rect(rect.x, rect.y, rect.width, rect.height);
 			Mat imageROI = new Mat(grayFrame, rectCrop);
 			
-			String filename = "dataset/"+"1-"+d+".png";
+			
+			
+			String filename = "dataset/"+ultimoId+"-"+d+".png";
 			System.out.println(String.format("Writing %s", filename));
 			Imgcodecs.imwrite(filename, imageROI);
 			d++;

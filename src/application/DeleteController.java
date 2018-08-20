@@ -42,6 +42,8 @@ public class DeleteController implements Initializable {
 		ConexionesExternas con = new ConexionesExternas();
 		
 		con.conexionTabla(tabla, people);
+		int idPrueba = con.lastId();
+		System.out.println(idPrueba);
 	}
 	
 	
