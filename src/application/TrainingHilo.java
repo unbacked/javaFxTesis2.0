@@ -8,8 +8,6 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.nio.IntBuffer;
 
-import org.bytedeco.javacpp.DoublePointer;
-import org.bytedeco.javacpp.IntPointer;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacpp.opencv_core.MatVector;
 import org.bytedeco.javacpp.opencv_face.FaceRecognizer;
@@ -24,8 +22,7 @@ public class TrainingHilo implements Runnable{
 	@Override
 	public void run() {
 		String trainingDir = "dataset";
-		org.bytedeco.javacpp.opencv_core.Mat testImage = imread("C:Users/DanielT/eclipse-workspace/JavaFXTesis/prueba.png", CV_LOAD_IMAGE_GRAYSCALE);
-		
+
 		File root = new File(trainingDir);
 		
 		FilenameFilter imgFilter = new FilenameFilter() {
@@ -56,15 +53,8 @@ public class TrainingHilo implements Runnable{
 		
 		FaceRecognizer faceRecognizer = LBPHFaceRecognizer.create();
 		
-		faceRecognizer.train(images, labels);
-		
-		IntPointer label = new IntPointer(1);
-		DoublePointer confidence = new DoublePointer(1);
-		faceRecognizer.predict(testImage, label, confidence);
-		int predictedLabel = label.get(0);
+		faceRecognizer.train(images, labels);		
 		faceRecognizer.save("trainer/trainer.yml");
-		
-		System.out.println("Predicted label: "+predictedLabel);
 		
 		con.conexionFTP();
 	}

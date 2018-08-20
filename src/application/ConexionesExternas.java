@@ -29,7 +29,7 @@ public class ConexionesExternas {
 			Client.setFileType(FTP.BINARY_FILE_TYPE);
 			
 			if(login) {
-				System.out.print("Se ha conectado");
+				System.out.println("Se ha conectado");
 			}
 			//Se crea un InputStream para el archivo que se va a cargar
 			File firstLocalFile = new File("C:/Users/DanielT/eclipse-workspace/JavaFXTesis/trainer/trainer.yml");
@@ -185,13 +185,15 @@ public class ConexionesExternas {
 	protected void eliminarUsuario(ObservableList<Person> items) throws SQLException {
 		String id = items.get(0).getId();
 		String query = "DELETE FROM empleados WHERE id=?";
+		int idInt = Integer.parseInt(id);
 		
 		try {
 			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tesis","root","");
 			
 			PreparedStatement stmt = myConn.prepareStatement(query);
-			stmt.setInt(1, Integer.parseInt(id));
+			stmt.setInt(1, idInt);
 			int result = stmt.executeUpdate();
+			eliminarFotos(idInt);
 			if (result >0) {
 				System.out.println("deleted");
 			}
@@ -212,6 +214,17 @@ public class ConexionesExternas {
 		}
 	}
 	
+	protected void eliminarFotos(int id) {
+		int numero = 0;
+		File folder = new File("C:/Users/DanielT/eclipse-workspace/JavaFXTesis/dataset");
+		for (File file : folder.listFiles()) {
+			numero = Integer.parseInt(file.getName().split("-")[0]);
+			if(id==numero) {
+				file.delete();
+			}
+		}
+	}
+
 	protected int lastId() throws SQLException{
 		int id = 0;
 		
@@ -246,4 +259,6 @@ public class ConexionesExternas {
 		
 		return id;
 	}
+	
+	
 }

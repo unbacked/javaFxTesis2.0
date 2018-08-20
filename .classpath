@@ -8,5 +8,8 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/openCV"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javaCPP"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/openCVByte"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ffmpeg"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javaCV"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javaCVPlatform"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

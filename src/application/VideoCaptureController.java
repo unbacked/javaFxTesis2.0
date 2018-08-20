@@ -34,6 +34,7 @@ public class VideoCaptureController implements Initializable {
 	@FXML private Button cameraButton;
 	@FXML private Button entrenador;
 	@FXML private Label hola;
+	@FXML private Label titulo;
 	
 	ConexionesExternas con = new ConexionesExternas();
 	
@@ -179,6 +180,18 @@ public class VideoCaptureController implements Initializable {
 	
 	private void updateImageView(ImageView view, Image image) {
 		Utils.onFXThread(view.imageProperty(), image);
+	}
+	
+	@FXML protected void training() throws InterruptedException {
+		/*
+		 * Revisar para los mensajes
+		 */
+		this.hola.setText("");
+		Thread hilo = new Thread(new TrainingHilo());
+		hilo.start();
+		//TimeUnit.SECONDS.sleep(5);
+		//this.hola.setText("Carga Completada");
+		
 	}
 
 }
