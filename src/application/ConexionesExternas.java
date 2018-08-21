@@ -32,9 +32,9 @@ public class ConexionesExternas {
 				System.out.println("Se ha conectado");
 			}
 			//Se crea un InputStream para el archivo que se va a cargar
-			File firstLocalFile = new File("C:/Users/DanielT/eclipse-workspace/JavaFXTesis/trainer/trainer.yml");
+			File firstLocalFile = new File("C:/Users/DanielT/eclipse-workspace/JavaFXTesis/trainer/trainer.xml");
 			
-			String firstRemoteFile = "trainer.yml";
+			String firstRemoteFile = "trainer.xml";
 			InputStream inputStream = new FileInputStream(firstLocalFile);
 			
 			System.out.println("Comenzando la carga del archivo");
@@ -162,7 +162,7 @@ public class ConexionesExternas {
 		return autorizacion;
 	}
 	
-	protected void conexionTabla(TableView<Person> list,  ObservableList<Person> items) throws SQLException {		
+	protected void conexionTabla(TableView<Person> list,  ObservableList<Person> items) throws SQLException {
 		try {
 			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tesis", "root", "");
 		}

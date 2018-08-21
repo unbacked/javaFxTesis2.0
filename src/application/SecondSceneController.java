@@ -18,6 +18,7 @@ public class SecondSceneController {
 	 */
 	@FXML private Button ingreso;
 	@FXML private Button eliminar;
+	@FXML private Button salir;
 	@FXML private Label mensaje;
 	
 	
@@ -28,6 +29,8 @@ public class SecondSceneController {
 		Stage newWindow;
 		newWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
 		
+		newWindow.setWidth(290);
+		newWindow.setHeight(320);
 		newWindow.setScene(datos);
 		newWindow.show();
 	}
@@ -39,7 +42,23 @@ public class SecondSceneController {
 		Stage newWindow;
 		newWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
 		
+		newWindow.setWidth(490);
+		newWindow.setHeight(590);
 		newWindow.setScene(borrar);
 		newWindow.show();
 	}
+	
+	@FXML protected void salirSistema(ActionEvent event) throws IOException {
+		Parent loader = FXMLLoader.load(getClass().getResource("FirstScene.fxml"));
+		Scene inicio = new Scene(loader);
+		
+		Stage newWindow;
+		newWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
+		
+		newWindow.setWidth(290);
+		newWindow.setHeight(215);
+		newWindow.setScene(inicio);
+		newWindow.show();
+	}
+	
 }

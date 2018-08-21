@@ -54,7 +54,7 @@ public class TrainingHilo implements Runnable{
 		FaceRecognizer faceRecognizer = LBPHFaceRecognizer.create();
 		
 		faceRecognizer.train(images, labels);		
-		faceRecognizer.save("trainer/trainer.yml");
+		faceRecognizer.save("trainer/trainer.xml");
 		
 		con.conexionFTP();
 	}

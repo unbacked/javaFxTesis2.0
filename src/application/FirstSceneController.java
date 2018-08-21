@@ -63,6 +63,8 @@ public class FirstSceneController {
 				Stage newWindow;
 				newWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
 				
+				newWindow.setWidth(310);
+				newWindow.setHeight(170);
 				newWindow.setScene(elegir);
 				newWindow.show();
 			}

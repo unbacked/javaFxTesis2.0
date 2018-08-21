@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -21,11 +22,16 @@ import org.opencv.videoio.VideoCapture;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import utils.Utils;
 
 public class VideoCaptureController implements Initializable {
@@ -33,6 +39,7 @@ public class VideoCaptureController implements Initializable {
 	@FXML private ImageView originalFrame;
 	@FXML private Button cameraButton;
 	@FXML private Button entrenador;
+	@FXML private Button inicio;
 	@FXML private Label hola;
 	@FXML private Label titulo;
 	
@@ -99,7 +106,8 @@ public class VideoCaptureController implements Initializable {
 		else {
 			this.camaraAct = false;
 			this.cameraButton.setText("Iniciar Camara");
-
+			this.entrenador.setDisable(false);
+			
 			this.stopAcquisition();
 		}
 	}
@@ -193,5 +201,17 @@ public class VideoCaptureController implements Initializable {
 		//this.hola.setText("Carga Completada");
 		
 	}
-
+	
+	@FXML protected void inicio(ActionEvent event) throws IOException {
+		Parent loader = FXMLLoader.load(getClass().getResource("Ingreso.fxml"));
+		Scene inicio = new Scene(loader);
+		
+		Stage window;
+		window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		
+		window.setWidth(290);
+		window.setHeight(320);
+		window.setScene(inicio);
+		window.show();
+	}
 }

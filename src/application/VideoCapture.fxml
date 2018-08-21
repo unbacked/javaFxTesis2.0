@@ -44,7 +44,12 @@
 			</padding>
    <children>
    			<Button fx:id="cameraButton" alignment="center" disable="false" onAction="#startCamera" text="Iniciar Camara" />
-            <Button fx:id="entrenador" mnemonicParsing="false" onAction="#training" text="Entrenar">
+            <Button fx:id="inicio" mnemonicParsing="false" onAction="#inicio" text="Regresar">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="entrenador" disable="true" mnemonicParsing="false" onAction="#training" text="Entrenar">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>

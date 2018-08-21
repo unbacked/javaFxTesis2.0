@@ -29,4 +29,11 @@
          </font>
       </Label>
    </top>
+   <bottom>
+      <Button fx:id="salir" mnemonicParsing="false" onAction="#salirSistema" text="Salir del Sistema" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
 </BorderPane>

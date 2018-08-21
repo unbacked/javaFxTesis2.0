@@ -33,7 +33,7 @@ public class DataController {
 	
 	ConexionesExternas con = new ConexionesExternas();
 	
-	@FXML protected void perfiles() {
+	@FXML protected void perfiles(ActionEvent event) {
 		String cargo = textCargo.getText().toLowerCase().trim();
 		if (cargo.contains("seguridad") || cargo.contains("admin")) {
 			textUser.setDisable(false);
@@ -51,6 +51,7 @@ public class DataController {
 		String cargo = textCargo.getText().toLowerCase();
 		String usuario = textUser.getText();
 		String clave = textPass.getText();
+		
 		int perfil = 0;
 		
 		if(nombre.length()==0|| apellido.length()==0 || cargo.length()==0) {
@@ -77,6 +78,7 @@ public class DataController {
 		if (nombre.length()!=0 && apellido.length()!=0 && cargo.length()!=0 && perfil == 0) {
 			mensaje.setText("Datos Ingresados");
 			con.conexionDBnormal(nombre, apellido, cargo, usuario, clave, perfil);
+			video.setDisable(false);
 		}
 	}
 	
@@ -92,4 +94,19 @@ public class DataController {
 		newWindow.setScene(captura);
 		newWindow.show();		
 	}
+	
+	@FXML protected void inicio(ActionEvent event) throws IOException {
+		Parent loader = FXMLLoader.load(getClass().getResource("SecondScene.fxml"));
+		Scene inicio = new Scene(loader);
+		
+		Stage window;
+		window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		
+		window.setWidth(310);
+		window.setHeight(170);
+		window.setScene(inicio);
+		window.show();
+	}
+	
+	
 }
